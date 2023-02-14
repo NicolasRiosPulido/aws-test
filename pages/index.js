@@ -18,8 +18,8 @@ const Home = () => {
           },
         }
       );
-      const resp = await res.json();
-      console.log(resp)
+      const { result } = await res.json();
+      setData(result);
     } catch (e) {
       console.log(e)
     }
@@ -38,9 +38,12 @@ const Home = () => {
       </Head>
       <div className={styles.container}>
         <h1 className={styles.title}>fisrt App aws</h1>
-      </div>
-      <div>
-        {}
+        <h3>datos BD</h3>
+        {data && data.map((item) => (
+          <div key={item.id} className={styles.containerDatos}>
+            <h2>{`Dato ${item.id}: ${item.nombre} ${item.correo}`}</h2>
+          </div>
+        ))}
       </div>
     </div>
   )
