@@ -1,7 +1,34 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+
+const Home = () => {
+  const [data, setData] = useState(null);
+
+  const apiCall = async () => {
+    try {
+      const res = await fetch(
+        `http://demonodeapp.eba-auwqaiwm.us-east-1.elasticbeanstalk.com/`,
+        {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': 'your-rapidapi-key',
+            'X-RapidAPI-Host': 'famous-quotes4.p.rapidapi.com',
+          },
+        }
+      );
+      const resp = await res.json();
+      console.log(resp)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    apiCall();
+  }, [])
+
   return (
     <div>
       <Head>
@@ -12,6 +39,11 @@ export default function Home() {
       <div className={styles.container}>
         <h1 className={styles.title}>fisrt App aws</h1>
       </div>
+      <div>
+        {}
+      </div>
     </div>
   )
 }
+
+export default Home;
